@@ -10,10 +10,10 @@ public class Estado {
     private String id;
     private Map<Character, Estado> proximosEstados;
 
-    public Estado() {
+    Estado() {
     }
 
-    public Estado(String id, Map<Character, Estado> proximosEstados) {
+    Estado(String id, Map<Character, Estado> proximosEstados) {
         this.id = id;
         this.proximosEstados = proximosEstados;
     }
