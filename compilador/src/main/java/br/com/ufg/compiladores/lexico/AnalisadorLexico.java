@@ -4,21 +4,25 @@ import br.com.ufg.compiladores.lexico.estados.EstadoController;
 
 import java.io.File;
 
+import org.apache.log4j.Logger;
+
 /**
  * Created by Rhuan on 15/04/2016.
  */
 public class AnalisadorLexico {
 
-    private EstadoController estadoController;
-    private File codigoFonte;
+	private static final Logger LOG = Logger.getLogger(AnalisadorLexico.class);
 
-    public AnalisadorLexico() {
-        this.estadoController = new EstadoController();
-    }
+	private EstadoController estadoController;
+	private File codigoFonte;
 
-    public AnalisadorLexico(File arquivoCodigoFonte) {
-        this.estadoController = new EstadoController();
-        this.codigoFonte = arquivoCodigoFonte;
-    }
+	public AnalisadorLexico(File arquivoCodigoFonte) {
+		LOG.info("Iniciando análise léxica do código fonte.");
+
+		this.estadoController = new EstadoController();
+		this.codigoFonte = arquivoCodigoFonte;
+
+		LOG.info("Análise léxica concluída!");
+	}
 
 }
