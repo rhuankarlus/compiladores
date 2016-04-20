@@ -16,7 +16,7 @@ public class Main {
 
 		LOG.info("Iniciando compilador...");
 
-		Configuracao config = Configuracao.getInstancia();
+		Configuracao.getInstancia();
 		new Thread(new DiretorioWatcher()).start();
 
 		LOG.info("Compilador iniciado!");

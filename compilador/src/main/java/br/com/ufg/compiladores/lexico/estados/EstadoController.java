@@ -7,18 +7,9 @@ import java.util.Map;
  */
 public class EstadoController {
 
-    public Estado criarNovoEstado() {
-        return criarNovoEstado("");
-    }
-
-
-    public Estado criarNovoEstado(String id) {
-        return criarNovoEstado(id, null);
-    }
-
-    public Estado criarNovoEstado(String id, Map<Character, Estado> proximosEstados) {
-        return new Estado(id, proximosEstados);
-    }
-
+	public Estado criarNovoEstado(String id, Tipo tipo,
+			Map<Character, Estado> proximosEstados) {
+		return new Estado(id, tipo, proximosEstados);
+	}
 
 }

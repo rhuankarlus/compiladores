@@ -7,31 +7,41 @@ import java.util.Map;
  */
 public class Estado {
 
-    private String id;
-    private Map<Character, Estado> proximosEstados;
+	private String id;
+	private Tipo tipo;
+	private Map<Character, Estado> proximosEstados;
 
-    Estado() {
-    }
+	Estado() {
+	}
 
-    Estado(String id, Map<Character, Estado> proximosEstados) {
-        this.id = id;
-        this.proximosEstados = proximosEstados;
-    }
+	Estado(String id, Tipo tipo, Map<Character, Estado> proximosEstados) {
+		this.id = id;
+		this.tipo = tipo;
+		this.proximosEstados = proximosEstados;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public Map<Character, Estado> getProximosEstados() {
-        return proximosEstados;
-    }
+	public Map<Character, Estado> getProximosEstados() {
+		return proximosEstados;
+	}
 
-    public void setProximosEstados(Map<Character, Estado> proximosEstados) {
-        this.proximosEstados = proximosEstados;
-    }
+	public void setProximosEstados(Map<Character, Estado> proximosEstados) {
+		this.proximosEstados = proximosEstados;
+	}
+
+	public Tipo getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo;
+	}
 
 }
