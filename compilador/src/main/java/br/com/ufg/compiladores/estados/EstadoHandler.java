@@ -1,4 +1,4 @@
-package br.com.ufg.compiladores.lexico.estados;
+package br.com.ufg.compiladores.estados;
 
 /**
  * Created by Rhuan on 15/04/2016.

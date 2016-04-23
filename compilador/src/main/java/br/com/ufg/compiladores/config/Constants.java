@@ -2,21 +2,30 @@ package br.com.ufg.compiladores.config;
 
 public interface Constants {
 
-	/**
-	 * Pasta onde devem ser colocados os arquivos que serão compilados. Essa
-	 * pasta é constantemente monitorada pela aplicação.
-	 */
-	String PASTA_DE_MONITORAMENTO = "../work/entrada";
+    /**
+     * Pasta onde devem ser colocados os arquivos que serï¿½o compilados. Essa
+     * pasta ï¿½ constantemente monitorada pela aplicaï¿½ï¿½o.
+     */
+    String PASTA_DE_MONITORAMENTO = "../work/entrada";
 
-	/**
-	 * Pasta onde serão jogados quaisquer arquivos que sejam despejados na
-	 * entrada.
-	 */
-	String PASTA_DE_PROCESSADOS = "../work/processados";
+    /**
+     * Pasta onde serï¿½o jogados quaisquer arquivos que sejam despejados na
+     * entrada.
+     */
+    String PASTA_DE_PROCESSADOS = "../work/processados";
 
-	/**
-	 * Pasta onde os resultados da compilação ficarão.
-	 */
-	String PASTA_DE_SAIDA = "../work/saida";
+    /**
+     * Pasta onde os resultados da compilaï¿½ï¿½o ficarï¿½o.
+     */
+    String PASTA_DE_SAIDA = "../work/saida";
 
+    /**
+     * Pasta onde sÃ£o armazenados os arquivos de configuraÃ§Ã£o
+     */
+    String PASTA_DE_CONFIGURACAO = "../config";
+
+    /**
+     * Por padrÃ£o sÃ£o 26 estados ao todo
+     */
+    Integer NUMERO_DE_ESTADOS_PADRAO = 26;
 }

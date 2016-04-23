@@ -1,4 +1,4 @@
-package br.com.ufg.compiladores.lexico.estados;
+package br.com.ufg.compiladores.estados;
 
 import java.util.Map;
 
