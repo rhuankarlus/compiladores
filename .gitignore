@@ -13,8 +13,6 @@ hs_err_pid*
 
 .idea
 *.iml
-work/
-config/
 target/
 
 .classpath

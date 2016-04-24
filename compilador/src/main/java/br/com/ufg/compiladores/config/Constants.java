@@ -28,4 +28,29 @@ public interface Constants {
      * Por padrão são 26 estados ao todo
      */
     Integer NUMERO_DE_ESTADOS_PADRAO = 26;
+
+    /**
+     * O separador de estados na tabela de transição
+     */
+    String SEPARADOR_DE_ESTADO = "---";
+
+    /**
+     * O separador de palavras chave e detalhes padrão
+     */
+    String SEPARADOR_DE_PALAVRA_RESERVADA = ":";
+
+    /**
+     * Valor de um estado inválido na tabela de transição
+     */
+    String ESTADO_INVALIDO = "###";
+
+    /**
+     * Nome do arquivo de palavras reservadas
+     */
+    String ARQUIVO_DE_PALAVRAS_RESERVADAS = "palavras-reservadas";
+
+    /**
+     * Nome do arquivo de tabela de transição
+     */
+    String ARQUIVO_DE_MATRIZ_DE_TRANSICAO = "matriz-de-transicao";
 }
