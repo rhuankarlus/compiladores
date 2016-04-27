@@ -53,4 +53,9 @@ public interface Constants {
      * Nome do arquivo de tabela de transição
      */
     String ARQUIVO_DE_MATRIZ_DE_TRANSICAO = "matriz-de-transicao";
+
+    /**
+     * Estado inicial padrão
+     */
+    String ESTADO_INICIAL = "E00";
 }

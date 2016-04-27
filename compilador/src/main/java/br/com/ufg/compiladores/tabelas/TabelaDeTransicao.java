@@ -1,10 +1,9 @@
 package br.com.ufg.compiladores.tabelas;
 
+import br.com.ufg.compiladores.config.Constants;
 import br.com.ufg.compiladores.estados.Estado;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,4 +37,9 @@ public class TabelaDeTransicao {
     public Estado getEstado(String estadoId) {
         return tabelaDeTransicao.estados.get(estadoId);
     }
+
+    public Estado getEstadoInicial() {
+        return tabelaDeTransicao.estados.get(Constants.ESTADO_INICIAL);
+    }
+
 }
