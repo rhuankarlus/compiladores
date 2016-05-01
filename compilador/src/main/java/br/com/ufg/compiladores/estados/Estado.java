@@ -1,6 +1,6 @@
 package br.com.ufg.compiladores.estados;
 
-import br.com.ufg.compiladores.inicializadores.TabelaDeTransicaoPosicoes;
+import br.com.ufg.compiladores.inicializadores.Tokens;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -61,8 +61,8 @@ public class Estado {
         return getId().hashCode();
     }
 
-    public void adicionarProximoEstado(TabelaDeTransicaoPosicoes token, String proximoEstado) {
+    public void adicionarProximoEstado(Tokens token, String proximoEstado) {
         if (proximosEstados == null) proximosEstados = new HashMap<>();
-        proximosEstados.put(token.getToken(), proximoEstado);
+        proximosEstados.put(token.getSimbolo(), proximoEstado);
     }
 }

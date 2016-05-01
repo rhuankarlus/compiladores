@@ -2,6 +2,7 @@ package br.com.ufg.compiladores.watchers;
 
 import java.io.File;
 
+import br.com.ufg.compiladores.inicializadores.Tokens;
 import org.apache.log4j.Logger;
 
 import br.com.ufg.compiladores.config.Configuracao;
@@ -46,8 +47,12 @@ public class DiretorioWatcher implements Runnable {
                     LOG.info("Encontrei um arquivo a ser compilado!");
 
                     // preparando o analisador lexico
-                    analisadorLexico = new AnalisadorLexico(arquivo);
-                    analisadorLexico.analisar();
+                    analisadorLexico = AnalisadorLexico.getInstance();
+                    analisadorLexico.setCodigoFonte(arquivo);
+                    Tokens token = null;
+                    do {
+                        token = analisadorLexico.getProximoToken();
+                    } while (token != Tokens.EOF);
                 }
 
                 // movendo arquivo para a pasta de 'processados'

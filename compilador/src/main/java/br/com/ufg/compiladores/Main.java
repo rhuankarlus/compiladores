@@ -28,7 +28,7 @@ public class Main {
         // inicializando a tabela de transição
         TabelaDeTransicaoInicializador.inicializar();
 
-//        new Thread(new DiretorioWatcher()).start();
+        new Thread(new DiretorioWatcher()).start();
 
         LOG.info("Compilador iniciado!");
 

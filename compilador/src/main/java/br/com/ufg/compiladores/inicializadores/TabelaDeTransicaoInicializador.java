@@ -62,7 +62,7 @@ public class TabelaDeTransicaoInicializador {
     }
 
     private Estado getEstado(String linha) {
-
+        // separa o id do estado e os próximos estados do mesmo
         final String[] fragmentos = linha.split(Constants.SEPARADOR_DE_ESTADO);
 
         Estado estado = new Estado();
@@ -79,7 +79,7 @@ public class TabelaDeTransicaoInicializador {
         for (int i = 1; i < fragmentos.length - 1; i++) {
             // eliminando os estados inválidos da lista
             if (!fragmentos[i].equals(Constants.ESTADO_INVALIDO)) {
-                estado.adicionarProximoEstado(TabelaDeTransicaoPosicoes.getTokenPelaPosicao(i), fragmentos[i]);
+                estado.adicionarProximoEstado(Tokens.getTokenPelaPosicao(i), fragmentos[i]);
             }
         }
 
