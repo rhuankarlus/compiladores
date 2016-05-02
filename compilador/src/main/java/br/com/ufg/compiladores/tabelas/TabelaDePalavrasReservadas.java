@@ -30,19 +30,11 @@ public class TabelaDePalavrasReservadas {
         return tabelaDePalavrasReservadas;
     }
 
-    public Map<String, String> getPalavrasReservadas() {
-        return palavrasReservadas;
-    }
-
-    public void setPalavrasReservadas(Map<String, String> palavrasReservadas) {
-        this.palavrasReservadas = palavrasReservadas;
-    }
-
     public void adicionarPalavra(String palavra, String descricao) {
         tabelaDePalavrasReservadas.palavrasReservadas.put(palavra, descricao);
     }
 
-    public Boolean isPalavraReservada(String palavra) {
+    public static Boolean isPalavraReservada(String palavra) {
         return tabelaDePalavrasReservadas.palavrasReservadas.containsKey(palavra);
     }
 

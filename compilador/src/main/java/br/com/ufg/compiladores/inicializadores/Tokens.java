@@ -5,8 +5,8 @@ package br.com.ufg.compiladores.inicializadores;
  */
 public enum Tokens {
 
-    LETRA(1, "L"),
-    DIGITO(2, "D"),
+    IDENTIFICADOR(1, "L"),
+    NUMERO(2, "D"),
     MAIS(3, "+"),
     MENOS(4, "-"),
     MULTIPLICACAO(5, "*"),
@@ -24,7 +24,8 @@ public enum Tokens {
     ABRE_PARENTESIS(17, "("),
     FECHA_PARENTESIS(18, ")"),
     PONTO_E_VIRGULA(19, ";"),
-    EOF(20, "EOF");
+    PALAVRA_RESERVADA(20, "PALAVRA_RESERVADA"),
+    EOF(21, "EOF");
 
     private Integer posicao;
     private String simbolo;
@@ -52,8 +53,4 @@ public enum Tokens {
         return null;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() + " | " + this.simbolo;
-    }
 }
