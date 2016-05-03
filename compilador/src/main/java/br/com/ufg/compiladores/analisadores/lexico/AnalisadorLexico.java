@@ -45,6 +45,8 @@ public class AnalisadorLexico {
 
     public Tokens getProximoToken() {
 
+        boolean isNecessarioIncrementarAPonteira = true;
+
         // caso o usuário chame o Léxico sem ter um arquivo de código fonte...
         // evita erros do programador, na verdade xD
         if (codigoFonte == null) {
@@ -90,18 +92,41 @@ public class AnalisadorLexico {
         if (token == null) {
             if (Character.isDigit(caracteresNaLinha[ultimoCaractereLido])) {
                 // se for um numero seguirá por estados diferentes
+                Character numero = caracteresNaLinha[ultimoCaractereLido];
+                final StringBuilder sb = new StringBuilder();
+
+                // procura formar a palavra completa
+                numero = concatenarEnquantoForNumero(numero, sb);
+
+                // verificando se foi inserido um ponto flutuante
+                if (ultimoCaractereLido != caracteresNaLinha.length && numero.equals('.')) {
+                    numero = concatenarEIterar(numero, sb);
+                }
+
+                // verificando se depois do ponto flutuante foram inseridos mais números
+                if (ultimoCaractereLido != caracteresNaLinha.length && Character.isDigit(numero)) {
+                    numero = concatenarEnquantoForNumero(numero, sb);
+                }
+
+                // aqui já teremos o número completo
+                final String numeroCompleto = sb.toString();
+
+                // salvando o token de numeral
+                token = Tokens.NUMERO;
+                simbolo = new Simbolo(token, numeroCompleto, "");
+
+                // a ponteira já foi incrementada
+                isNecessarioIncrementarAPonteira = false;
 
             } else if (Character.isAlphabetic(caracteresNaLinha[ultimoCaractereLido])) {
                 // se for uma letra verifica se é palavra interna ou identificador
                 Character letra = caracteresNaLinha[ultimoCaractereLido];
                 final StringBuilder sb = new StringBuilder();
 
-                // procurara formar a palavra completa
-                do {
-                    sb.append(letra);
-                    ultimoCaractereLido++;
-                    letra = ultimoCaractereLido != caracteresNaLinha.length ? caracteresNaLinha[ultimoCaractereLido] : ' ';
-                } while (isNotEspacoOuFinalDeLinha(letra));
+                // procura formar a palavra completa
+                while (isCaractereAceitavel(letra)) {
+                    letra = concatenarEIterar(letra, sb);
+                }
 
                 // aqui já teremos a palavra completa
                 final String palavra = sb.toString();
@@ -109,22 +134,61 @@ public class AnalisadorLexico {
                 // verificando se o TOKEN é uma palavra reservada ou um identificador
                 token = TabelaDePalavrasReservadas.isPalavraReservada(palavra) ? Tokens.PALAVRA_RESERVADA : Tokens.IDENTIFICADOR;
                 simbolo = new Simbolo(token, palavra, "");
+
+                // a ponteira já foi incrementada
+                isNecessarioIncrementarAPonteira = false;
             }
         }
 
+        // se o token chegou NULL aqui é porque houve algum erro
+        // e esse erro deve ser tratado parando o programa e exibindo a linha
+        // e a coluna do mesmo
+        if (token == null) {
+            LOG.error("Um caractere está incorreto no arquivo [" + codigoFonte.getName() + "]");
+            LOG.error("Linha: " + ultimaLinhaLida + " | Coluna: " + (ultimoCaractereLido + 1));
+            throw new RuntimeException("Erro de compilação.");
+        }
+
         // incrementando a ponteira de leitura para o proximo caractere que será lido
-        ultimoCaractereLido++;
+        if (isNecessarioIncrementarAPonteira) ultimoCaractereLido++;
 
         // adicionando o TOKEN encontrado ao simbolo
         simbolo = simbolo == null ? new Simbolo(token, token.getSimbolo(), "") : simbolo;
-        tabelaDeSimbolos.add(tabelaDeSimbolos.size(), simbolo);
+
+        // apenas adiciona os IDENTIFICADORES que já não estejam contidos na tabela
+        if (token.equals(Tokens.IDENTIFICADOR) && !tabelaDeSimbolos.contains(simbolo)) {
+            LOG.info("Adicionando o IDENTIFICADOR [ " + simbolo.getTipo() + ": " + simbolo.getLexema() + " ]");
+            tabelaDeSimbolos.add(tabelaDeSimbolos.size(), simbolo);
+        }
 
         LOG.info("TOKEN reconhecido: [ " + simbolo.getToken().toString() + " | " + simbolo.getLexema() + " ]");
         return token;
     }
 
-    private boolean isNotEspacoOuFinalDeLinha(Character letra) {
-        return !letra.toString().replaceAll(" ", "").equals("") && !letra.toString().replaceAll(" ", "").equals(System.getProperty("line.separator"));
+    private Character concatenarEnquantoForNumero(Character caractere, StringBuilder stringBuilder) {
+        while (Character.isDigit(caractere)) {
+            caractere = concatenarEIterar(caractere, stringBuilder);
+        }
+        return caractere;
+    }
+
+    private Character concatenarEIterar(Character caractere, StringBuilder stringBuilder) {
+        stringBuilder.append(caractere);
+        ultimoCaractereLido++;
+        caractere = ultimoCaractereLido != caracteresNaLinha.length ? caracteresNaLinha[ultimoCaractereLido] : ' ';
+        return caractere;
+    }
+
+    /**
+     * Verifica se o caractere lido não é vazio e nem quebra de linha e se é uma LETRA, um DÍGITO ou o 'underline'
+     *
+     * @param letra Letra que será verificada
+     * @return <b>true</b> caso a letra se enquadre nos requisitos de um identificador ou <b>false</b> em caso contrário
+     */
+    private boolean isCaractereAceitavel(Character letra) {
+        return !letra.toString().replaceAll(" ", "").equals("")
+                && !letra.toString().replaceAll(" ", "").equals(System.getProperty("line.separator"))
+                && (Character.isAlphabetic(letra) || Character.isDigit(letra) || letra.equals('_'));
     }
 
     public void setCodigoFonte(File codigoFonte) {

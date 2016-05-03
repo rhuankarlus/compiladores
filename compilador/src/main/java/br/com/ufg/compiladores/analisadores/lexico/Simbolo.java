@@ -40,4 +40,19 @@ public class Simbolo {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Simbolo)) return false;
+
+        Simbolo simbolo = (Simbolo) o;
+
+        return getLexema() != null ? getLexema().equals(simbolo.getLexema()) : simbolo.getLexema() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return getLexema() != null ? getLexema().hashCode() : 0;
+    }
 }
