@@ -16,7 +16,7 @@ public enum Tokens {
     ASPAS(9, "\""),
     ABRE_CHAVES(10, "{"),
     FECHA_CHAVES(11, "}"),
-    ESPAÇO(12, " "),
+    ESPACO(12, " "),
     FIM_DE_LINHA(13, System.getProperty("line.separator")),
     MENOR_QUE(14, "<"),
     MAIOR_QUE(15, ">"),
@@ -25,7 +25,8 @@ public enum Tokens {
     FECHA_PARENTESIS(18, ")"),
     PONTO_E_VIRGULA(19, ";"),
     PALAVRA_RESERVADA(20, "PALAVRA_RESERVADA"),
-    EOF(21, "EOF");
+    EOF(21, "EOF"), 
+    COMENTARIO(22, "COMENTARIO");
 
     private Integer posicao;
     private String simbolo;
