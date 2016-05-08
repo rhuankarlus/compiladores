@@ -65,4 +65,8 @@ public class Estado {
         if (proximosEstados == null) proximosEstados = new HashMap<>();
         proximosEstados.put(token.getSimbolo(), proximoEstado);
     }
+
+    public Boolean isFinal() {
+        return this.getTipo() == Tipo.FINAL;
+    }
 }

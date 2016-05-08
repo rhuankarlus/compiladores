@@ -21,10 +21,10 @@ public class Configuracao {
 
     public static Configuracao getInstancia() {
         if (configuracao == null) {
-            LOG.info("Carregando a configura��o para o compilador...");
+            LOG.info("Carregando a configura\u00e7\u00e3o para o compilador...");
             configuracao = new Configuracao();
             configuracao.construir();
-            LOG.info("Confiugra��o carregada!");
+            LOG.info("Confiugra\u00e7\u00e3o carregada!");
         }
 
         return configuracao;
@@ -38,11 +38,11 @@ public class Configuracao {
     }
 
     private File carregarDiretorioValido(String path) {
-        LOG.info("Carregando diret�rio [" + path + "]");
+        LOG.info("Carregando diret\u00f3rio [" + path + "]");
         File diretorio = new File(path);
 
         if (!diretorio.exists()) {
-            LOG.info("O diret�rio n�o existe. Vou constru�-lo!");
+            LOG.info("O diret\u00f3rio n\u00e3o existe. Vou constru\u00ed-lo!");
             diretorio.mkdirs();
         }
 

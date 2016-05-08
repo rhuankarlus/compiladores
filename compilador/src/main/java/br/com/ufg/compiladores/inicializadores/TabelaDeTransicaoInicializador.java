@@ -49,7 +49,7 @@ public class TabelaDeTransicaoInicializador {
 
     private void montarTabelaDeTransicao() throws IOException {
         LOG.info("Criando a tabela de transição...");
-        Files.lines(getPalavrasReservadasPath()).parallel().forEach(linha -> {
+        Files.lines(getMatrizDeTransicaoPath()).parallel().forEach(linha -> {
             // este if descarta a primeira linha que serve apenas para organizar a tabela
             if (!linha.startsWith("EST")) {
                 Estado estado = getEstado(linha);
@@ -86,7 +86,7 @@ public class TabelaDeTransicaoInicializador {
         return estado;
     }
 
-    private Path getPalavrasReservadasPath() {
+    private Path getMatrizDeTransicaoPath() {
         return Paths.get(
                 configuracao.getDiretorioDeConfiguracao().getAbsolutePath(),
                 Constants.ARQUIVO_DE_MATRIZ_DE_TRANSICAO
