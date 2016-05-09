@@ -90,19 +90,47 @@ public class AnalisadorLexico {
         // para o primeiro estado a primeira iteração se torna o estado atual
         if (proximoEstado != null) estadoAtual = proximoEstado;
 
-        // verificando se o próximo estado é final ou não
-        Boolean isProximoEstadoFinal = proximoEstado != null && proximoEstado.isFinal();
-        if (isProximoEstadoFinal) {
-            while (isProximoEstadoFinal) {
+        // tratando identificadores
+        // E01 : número - quando ler um número ele pode ser inteiro ou real
+        if (estadoAtual != null && estadoAtual.getId().equals("E01")) {
+            // pode-se pegar o próximo caractere visto que o '.' já foi adicionado anteriormente
+            proximoEstado = estadoHandler.getProximoEstado(estadoAtual, proximoCaractere);
+
+            // tratando o tipo de numero
+            tipo = tipo == TiposDeTokens.NENHUM ? TiposDeTokens.INTEIRO : tipo;
+
+            // E08 : fecha aspas - fim do literal
+            while (
+                    proximoEstado != null &&
+                            (proximoEstado.getId().equals("E01") ||
+                                    proximoEstado.getId().equals("E02") ||
+                                    proximoEstado.getId().equals("E03") ||
+                                    proximoEstado.getId().equals("E04") ||
+                                    proximoEstado.getId().equals("E05") ||
+                                    proximoEstado.getId().equals("E06")
+                            )
+                    ) {
+                if (proximoEstado.getId().equals("E02")) tipo = TiposDeTokens.REAL;
                 estadoAtual = proximoEstado;
                 proximoCaractere = lerProximoCaractere();
                 proximoEstado = estadoHandler.getProximoEstado(proximoEstado, proximoCaractere);
-                isProximoEstadoFinal = proximoEstado != null && proximoEstado.isFinal();
-                if (isProximoEstadoFinal) lexema += proximoCaractere;
+                lexema += proximoCaractere;
             }
-            // se ainda não estiver no fim da linha então volta o último caractere lido
-            // para que todos os caracteres possam ser lidos
-            if (ultimoCaractereLido < caracteresNaLinha.length) ultimoCaractereLido--;
+
+            ultimoCaractereLido--;
+            lexema = lexema.substring(0, lexema.length() - 1);
+        }
+
+        // tratando identificadores
+        // E09 : letra - quando ler uma letra pode ler outra letra ou um dígito qualquer formando um identificador
+        if (estadoAtual != null && estadoAtual.getId().equals("E09")) {
+            // E08 : fecha aspas - fim do literal
+            while (proximoEstado != null && proximoEstado.getId().equals("E09")) {
+                estadoAtual = proximoEstado;
+                proximoCaractere = lerProximoCaractere();
+                proximoEstado = estadoHandler.getProximoEstado(proximoEstado, proximoCaractere);
+                if (proximoEstado != null && proximoEstado.getId().equals("E09")) lexema += proximoCaractere;
+            }
         }
 
         // tratando aspas - formando literais
@@ -117,6 +145,7 @@ public class AnalisadorLexico {
                 proximoEstado = estadoHandler.getProximoEstado(proximoEstado, proximoCaractere);
                 if (estadoAtual != null && !estadoAtual.getId().equals("E08")) lexema += proximoCaractere;
             }
+            ultimoCaractereLido--;
         }
 
         // tratando comentario - ignorando
@@ -133,45 +162,19 @@ public class AnalisadorLexico {
             token = Tokens.COMENTARIO;
         }
 
-        // tratando identificadores
-        // E09 : letra - quando ler uma letra pode ler outra letra ou um dígito qualquer formando um identificador
-        if (estadoAtual != null && estadoAtual.getId().equals("E09")) {
-            // E08 : fecha aspas - fim do literal
-            while (proximoEstado != null && proximoEstado.getId().equals("E09")) {
+        // verificando se o próximo estado é final ou não
+        Boolean isProximoEstadoFinal = proximoEstado != null && proximoEstado.isFinal();
+        if (isProximoEstadoFinal) {
+            while (isProximoEstadoFinal) {
                 estadoAtual = proximoEstado;
                 proximoCaractere = lerProximoCaractere();
                 proximoEstado = estadoHandler.getProximoEstado(proximoEstado, proximoCaractere);
-                if (proximoEstado != null && proximoEstado.getId().equals("E08")) lexema += proximoCaractere;
+                isProximoEstadoFinal = proximoEstado != null && proximoEstado.isFinal();
+                if (isProximoEstadoFinal) lexema += proximoCaractere;
             }
-        }
-
-        // tratando identificadores
-        // E01 : número - quando ler um número ele pode ser inteiro ou real
-        if (estadoAtual != null && estadoAtual.getId().equals("E01")) {
-            // pode-se pegar o próximo caractere visto que o '.' já foi adicionado anteriormente
-            lexema += proximoCaractere;
-            ultimoCaractereLido++;
-
-            // tratando o tipo de numero
-            tipo = tipo == TiposDeTokens.NENHUM ? TiposDeTokens.INTEIRO : tipo;
-            if (proximoEstado != null && proximoEstado.getId().equals("E02")) tipo = TiposDeTokens.REAL;
-
-            // E08 : fecha aspas - fim do literal
-            while (
-                    proximoEstado != null &&
-                            (proximoEstado.getId().equals("E01") ||
-                                    proximoEstado.getId().equals("E02") ||
-                                    proximoEstado.getId().equals("E03") ||
-                                    proximoEstado.getId().equals("E04") ||
-                                    proximoEstado.getId().equals("E05") ||
-                                    proximoEstado.getId().equals("E06")
-                            )
-                    ) {
-                estadoAtual = proximoEstado;
-                proximoCaractere = lerProximoCaractere();
-                proximoEstado = estadoHandler.getProximoEstado(proximoEstado, proximoCaractere);
-                lexema += proximoCaractere;
-            }
+            // se ainda não estiver no fim da linha então volta o último caractere lido
+            // para que todos os caracteres possam ser lidos
+            if (ultimoCaractereLido < caracteresNaLinha.length) ultimoCaractereLido--;
         }
 
         // verificando se o estado atual é final ou não
@@ -179,13 +182,17 @@ public class AnalisadorLexico {
             token = Tokens.getTokenDoEstadoFinal(estadoAtual.getId());
 
             // adicionando o símbolo do identificador à tabela de símbolos
-            if (token == Tokens.IDENTIFICADOR && !TabelaDePalavrasReservadas.isPalavraReservada(lexema)) {
-                final Simbolo simbolo = new Simbolo(token, lexema, tipo.getTipo());
-                if (!tabelaDeSimbolos.contains(simbolo)) tabelaDeSimbolos.add(simbolo);
-            } else if (TabelaDePalavrasReservadas.isPalavraReservada(lexema)) {
-                token = Tokens.PALAVRA_RESERVADA;
+            if (token == Tokens.IDENTIFICADOR) {
+                if (proximoCaractere != null && proximoCaractere != Character.MIN_VALUE) ultimoCaractereLido--;
+                if (!TabelaDePalavrasReservadas.isPalavraReservada(lexema)) {
+                    final Simbolo simbolo = new Simbolo(token, lexema, tipo.getTipo());
+                    if (!tabelaDeSimbolos.contains(simbolo)) tabelaDeSimbolos.add(simbolo);
+                    System.out.println("IDENTIFICADOR: [ " + token.getTokenId() + " | " + lexema + " | " + tipo.getTipo() + " ]");
+                } else if (TabelaDePalavrasReservadas.isPalavraReservada(lexema)) {
+                    token = Tokens.PALAVRA_RESERVADA;
+                    System.out.println("PALAVRA RESERVADA: [ " + lexema + " ]");
+                }
             }
-
             exibirDadosDoToken(token, lexema, tipo);
 
             return token;
@@ -194,6 +201,13 @@ public class AnalisadorLexico {
         // como não é um estado final pode ser que o token retornado
         // seja para um comentário, espaço, final de linha, etc...
         token = token == null ? Tokens.getTokenPeloSimbolo(proximoCaractere) : token;
+
+        // se o token chegar nulo aqui obviamente aconteceu um erro
+        if (token == null) {
+            // lança uma exceção que exibe a entrada necessária, a linha e a coluna do erro
+            throw new LexicoException(estadoAtual, lexema, ++ultimaLinhaLida, ultimoCaractereLido);
+        }
+
         exibirDadosDoToken(token, lexema, tipo);
 
         return token;
