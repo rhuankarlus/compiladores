@@ -4,6 +4,7 @@ import br.com.ufg.compiladores.estados.Estado;
 import br.com.ufg.compiladores.estados.EstadoHandler;
 import br.com.ufg.compiladores.inicializadores.TiposDeTokens;
 import br.com.ufg.compiladores.inicializadores.Tokens;
+import br.com.ufg.compiladores.tabelas.TabelaDePalavrasReservadas;
 import br.com.ufg.compiladores.tabelas.TabelaDeTransicao;
 import org.apache.log4j.Logger;
 
@@ -30,14 +31,6 @@ public class AnalisadorLexico {
     private char[] caracteresNaLinha;
     private Integer ultimoCaractereLido;
 
-    private Tokens tokenComentario;
-    private Boolean isTokenComentarioLido;
-
-    private Tokens tokenAspas;
-    private Boolean isTokenAspasLido;
-
-    private Simbolo ultimoSimboloLido;
-
     private List<Simbolo> tabelaDeSimbolos;
 
     private EstadoHandler estadoHandler;
@@ -53,7 +46,7 @@ public class AnalisadorLexico {
     private AnalisadorLexico() {
     }
 
-    public Tokens getProximoToken() {
+    public Tokens getProximoToken() throws LexicoException {
 
         Estado estadoAtual = TABELA_DE_TRANSICAO.getEstadoInicial();
         Tokens token = null;
@@ -184,7 +177,17 @@ public class AnalisadorLexico {
         // verificando se o estado atual é final ou não
         if (estadoAtual != null && estadoAtual.isFinal()) {
             token = Tokens.getTokenDoEstadoFinal(estadoAtual.getId());
+
+            // adicionando o símbolo do identificador à tabela de símbolos
+            if (token == Tokens.IDENTIFICADOR && !TabelaDePalavrasReservadas.isPalavraReservada(lexema)) {
+                final Simbolo simbolo = new Simbolo(token, lexema, tipo.getTipo());
+                if (!tabelaDeSimbolos.contains(simbolo)) tabelaDeSimbolos.add(simbolo);
+            } else if (TabelaDePalavrasReservadas.isPalavraReservada(lexema)) {
+                token = Tokens.PALAVRA_RESERVADA;
+            }
+
             exibirDadosDoToken(token, lexema, tipo);
+
             return token;
         }
 
@@ -224,8 +227,6 @@ public class AnalisadorLexico {
         ultimaLinhaLida = 0;
         ultimoCaractereLido = 0;
         tabelaDeSimbolos = new ArrayList<>();
-        isTokenComentarioLido = false;
-        isTokenAspasLido = false;
         estadoHandler = new EstadoHandler();
         caracteresNaLinha = null;
         linhas = null;

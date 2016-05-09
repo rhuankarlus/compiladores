@@ -2,6 +2,7 @@ package br.com.ufg.compiladores.watchers;
 
 import java.io.File;
 
+import br.com.ufg.compiladores.analisadores.lexico.LexicoException;
 import br.com.ufg.compiladores.inicializadores.Tokens;
 import org.apache.log4j.Logger;
 
@@ -51,7 +52,11 @@ public class DiretorioWatcher implements Runnable {
                     analisadorLexico.setCodigoFonte(arquivo);
                     Tokens token = null;
                     do {
-                        token = analisadorLexico.getProximoToken();
+                        try {
+                            token = analisadorLexico.getProximoToken();
+                        } catch (LexicoException e) {
+                            e.printStackTrace();
+                        }
                     } while (token != Tokens.EOF);
                 }
 

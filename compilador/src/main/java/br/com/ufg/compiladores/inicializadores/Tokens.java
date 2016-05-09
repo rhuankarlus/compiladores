@@ -24,7 +24,7 @@ public enum Tokens {
     ABRE_PARENTESIS(17, "(", "AB_P", "E24"),
     FECHA_PARENTESIS(18, ")", "FC_P", "E25"),
     PONTO_E_VIRGULA(19, ";", "PT_V", "E12"),
-    PALAVRA_RESERVADA(20, "PALAVRA_RESERVADA", ""),
+    PALAVRA_RESERVADA(20, "PALAVRA_RESERVADA", "Palavra Reservada"),
     EOF(21, "", "EOF", "E11"),
     COMENTARIO(22, "COMENTARIO", "Coment\u00e1rio"),
     MAIOR_OU_IGUAL(23, "MAIOR_OU_IGUAL", "OPR", "E18"),
