@@ -117,7 +117,7 @@ public class AnalisadorLexico {
                 lexema += proximoCaractere;
             }
 
-            ultimoCaractereLido--;
+            if (!proximoCaractere.equals(Character.MIN_VALUE)) ultimoCaractereLido--;
             lexema = lexema.substring(0, lexema.length() - 1);
         }
 
@@ -145,7 +145,7 @@ public class AnalisadorLexico {
                 proximoEstado = estadoHandler.getProximoEstado(proximoEstado, proximoCaractere);
                 if (estadoAtual != null && !estadoAtual.getId().equals("E08")) lexema += proximoCaractere;
             }
-            ultimoCaractereLido--;
+            if (!proximoCaractere.equals(Character.MIN_VALUE)) ultimoCaractereLido--;
         }
 
         // tratando comentario - ignorando
