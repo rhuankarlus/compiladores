@@ -1,4 +1,4 @@
-package br.com.ufg.compiladores.inicializadores;
+package br.com.ufg.compiladores.tokens;
 
 /**
  * Created by rhuan on 24/04/2016.
@@ -6,31 +6,31 @@ package br.com.ufg.compiladores.inicializadores;
 public enum Tokens {
 
     IDENTIFICADOR(1, "IDENTIFICADOR", "id", "E09"),
-    NUMERO(2, "NUMERO", "Num", "E01", "E03", "E06"),
-    MAIS(3, "+", "OPM", "E20"),
-    MENOS(4, "-", "OPM", "E21"),
-    MULTIPLICACAO(5, "*", "OPM", "E22"),
-    DIVISAO(6, "/", "OPM", "E23"),
+    NUMERO(2, "NUMERO", "num", "E01", "E03", "E06"),
+    MAIS(3, "+", "opm", "E20"),
+    MENOS(4, "-", "opm", "E21"),
+    MULTIPLICACAO(5, "*", "opm", "E22"),
+    DIVISAO(6, "/", "opm", "E23"),
     PONTO(7, ".", ""),
     ELEVADO(8, "E", ""),
-    ASPAS(9, "\"", "Literal", "E08"),
+    ASPAS(9, "\"", "literal", "E08"),
     ABRE_CHAVES(10, "{", ""),
     FECHA_CHAVES(11, "}", ""),
     ESPACO(12, " ", ""),
     FIM_DE_LINHA(13, System.getProperty("line.separator"), "EOF"),
-    MENOR_QUE(14, "<", "OPR", "E13"),
-    MAIOR_QUE(15, ">", "OPR", "E17"),
-    IGUAL(16, "=", "OPR", "E19"),
-    ABRE_PARENTESIS(17, "(", "AB_P", "E24"),
-    FECHA_PARENTESIS(18, ")", "FC_P", "E25"),
-    PONTO_E_VIRGULA(19, ";", "PT_V", "E12"),
-    PALAVRA_RESERVADA(20, "PALAVRA_RESERVADA", "Palavra Reservada"),
+    MENOR_QUE(14, "<", "opr", "E13"),
+    MAIOR_QUE(15, ">", "opr", "E17"),
+    IGUAL(16, "=", "opr", "E19"),
+    ABRE_PARENTESIS(17, "(", "(", "E24"),
+    FECHA_PARENTESIS(18, ")", ")", "E25"),
+    PONTO_E_VIRGULA(19, ";", ";", "E12"),
+    PALAVRA_RESERVADA(20, "PALAVRA_RESERVADA", ""),
     EOF(21, "", "EOF", "E11"),
     COMENTARIO(22, "COMENTARIO", "Coment\u00e1rio"),
-    MAIOR_OU_IGUAL(23, "MAIOR_OU_IGUAL", "OPR", "E18"),
-    MENOR_OU_IGUAL(24, "MENOR_OU_IGUAL", "OPR", "E16"),
-    ATRIBUICAO(25, "ATRIBUICAO", "RCB", "E14"),
-    DIFERENTE(26, "DIFERENTE", "OPR", "E15");
+    MAIOR_OU_IGUAL(23, "MAIOR_OU_IGUAL", "opr", "E18"),
+    MENOR_OU_IGUAL(24, "MENOR_OU_IGUAL", "opr", "E16"),
+    ATRIBUICAO(25, "ATRIBUICAO", "rcb", "E14"),
+    DIFERENTE(26, "DIFERENTE", "opr", "E15");
 
     private Integer posicao;
     private String simbolo;
@@ -83,4 +83,27 @@ public enum Tokens {
         return null;
     }
 
+    public Integer getPosicao() {
+        return posicao;
+    }
+
+    public void setPosicao(Integer posicao) {
+        this.posicao = posicao;
+    }
+
+    public void setSimbolo(String simbolo) {
+        this.simbolo = simbolo;
+    }
+
+    public void setTokenId(String tokenId) {
+        this.tokenId = tokenId;
+    }
+
+    public String[] getEstadosFinais() {
+        return estadosFinais;
+    }
+
+    public void setEstadosFinais(String[] estadosFinais) {
+        this.estadosFinais = estadosFinais;
+    }
 }

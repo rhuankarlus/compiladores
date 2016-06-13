@@ -1,7 +1,7 @@
 package br.com.ufg.compiladores.tabelas;
 
 import br.com.ufg.compiladores.config.Constants;
-import br.com.ufg.compiladores.estados.Estado;
+import br.com.ufg.compiladores.analisadores.lexico.estados.Estado;
 
 import java.util.HashMap;
 import java.util.Map;

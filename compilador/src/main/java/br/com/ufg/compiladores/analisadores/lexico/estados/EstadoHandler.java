@@ -1,6 +1,5 @@
-package br.com.ufg.compiladores.estados;
+package br.com.ufg.compiladores.analisadores.lexico.estados;
 
-import br.com.ufg.compiladores.inicializadores.TiposDeTokens;
 import br.com.ufg.compiladores.tabelas.TabelaDeTransicao;
 
 /**

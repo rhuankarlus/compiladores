@@ -2,9 +2,10 @@ package br.com.ufg.compiladores.inicializadores;
 
 import br.com.ufg.compiladores.config.Configuracao;
 import br.com.ufg.compiladores.config.Constants;
-import br.com.ufg.compiladores.estados.Estado;
-import br.com.ufg.compiladores.estados.Tipo;
+import br.com.ufg.compiladores.analisadores.lexico.estados.Estado;
+import br.com.ufg.compiladores.analisadores.lexico.estados.Tipo;
 import br.com.ufg.compiladores.tabelas.TabelaDeTransicao;
+import br.com.ufg.compiladores.tokens.Tokens;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
@@ -27,7 +28,6 @@ public class TabelaDeTransicaoInicializador {
     public static TabelaDeTransicaoInicializador tabelaDeTransicaoInicializador;
 
     public List<Estado> estados;
-    private Path palavrasReservadasPath;
 
     private TabelaDeTransicaoInicializador() {
         estados = new ArrayList<>(Constants.NUMERO_DE_ESTADOS_PADRAO);

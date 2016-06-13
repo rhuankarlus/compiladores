@@ -7,6 +7,6 @@ se : Estrutura condicional
 entao : Elemento de estrutura condicional
 fimse : Elemento de estrutura condicional
 fim : Delimita o fim do programa
-inteiro : Tipo de dado
+int : Tipo de dado
 real : Tipo de dado
-literal : Tipo de dado
+lit : Tipo de dado

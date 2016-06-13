@@ -1,9 +1,9 @@
 package br.com.ufg.compiladores.analisadores.lexico;
 
-import br.com.ufg.compiladores.estados.Estado;
-import br.com.ufg.compiladores.estados.EstadoHandler;
-import br.com.ufg.compiladores.inicializadores.TiposDeTokens;
-import br.com.ufg.compiladores.inicializadores.Tokens;
+import br.com.ufg.compiladores.analisadores.lexico.estados.Estado;
+import br.com.ufg.compiladores.analisadores.lexico.estados.EstadoHandler;
+import br.com.ufg.compiladores.tokens.TiposDeTokens;
+import br.com.ufg.compiladores.tokens.Tokens;
 import br.com.ufg.compiladores.tabelas.TabelaDePalavrasReservadas;
 import br.com.ufg.compiladores.tabelas.TabelaDeTransicao;
 import org.apache.log4j.Logger;
@@ -187,16 +187,20 @@ public class AnalisadorLexico {
                 if (!TabelaDePalavrasReservadas.isPalavraReservada(lexema)) {
                     final Simbolo simbolo = new Simbolo(token, lexema, tipo.getTipo());
                     if (!tabelaDeSimbolos.contains(simbolo)) tabelaDeSimbolos.add(simbolo);
-                    System.out.println("IDENTIFICADOR: [ " + token.getTokenId() + " | " + lexema + " | " + tipo.getTipo() + " ]");
+//                    System.out.println("IDENTIFICADOR: [ " + token.getTokenId() + " | " + lexema + " | " + tipo.getTipo() + " ]");
                 } else if (TabelaDePalavrasReservadas.isPalavraReservada(lexema)) {
                     token = Tokens.PALAVRA_RESERVADA;
-                    System.out.println("PALAVRA RESERVADA: [ " + lexema + " ]");
+                    token.setTokenId(lexema);
+//                    System.out.println("PALAVRA RESERVADA: [ " + lexema + " ]");
                 }
             }
             exibirDadosDoToken(token, lexema, tipo);
 
             return token;
         }
+
+        // tratando TABs (tabulações) removendo o \t e deixando apenas o espaço em branco
+        if (proximoCaractere.equals('\t') || proximoCaractere.equals('\u0000')) proximoCaractere = ' ';
 
         // como não é um estado final pode ser que o token retornado
         // seja para um comentário, espaço, final de linha, etc...
@@ -237,7 +241,7 @@ public class AnalisadorLexico {
         }
     }
 
-    private void resetarAnalisador() {
+    public void resetarAnalisador() {
         ultimaLinhaLida = 0;
         ultimoCaractereLido = 0;
         tabelaDeSimbolos = new ArrayList<>();
@@ -293,5 +297,9 @@ public class AnalisadorLexico {
 
     public List<Simbolo> getTabelaDeSimbolos() {
         return tabelaDeSimbolos;
+    }
+
+    public Integer getUltimaLinhaLida() {
+        return ultimaLinhaLida;
     }
 }

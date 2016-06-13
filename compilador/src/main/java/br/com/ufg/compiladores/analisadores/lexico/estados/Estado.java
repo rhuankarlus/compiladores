@@ -1,6 +1,6 @@
-package br.com.ufg.compiladores.estados;
+package br.com.ufg.compiladores.analisadores.lexico.estados;
 
-import br.com.ufg.compiladores.inicializadores.Tokens;
+import br.com.ufg.compiladores.tokens.Tokens;
 
 import java.util.HashMap;
 import java.util.Map;

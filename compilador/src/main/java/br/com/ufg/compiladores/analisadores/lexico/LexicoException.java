@@ -1,6 +1,6 @@
 package br.com.ufg.compiladores.analisadores.lexico;
 
-import br.com.ufg.compiladores.estados.Estado;
+import br.com.ufg.compiladores.analisadores.lexico.estados.Estado;
 import org.apache.log4j.Logger;
 
 /**

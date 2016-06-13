@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="br.com.ufg.compiladores.mongodb.MongoPopulador">
+  <grid id="27dc6" binding="painelPrincipal" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="10" left="10" bottom="10" right="10"/>
+    <constraints>
+      <xy x="20" y="20" width="338" height="235"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="9287e" binding="painelSecundario" layout-manager="GridLayoutManager" row-count="6" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="10" left="10" bottom="10" right="10"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="49b88" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Estado"/>
+            </properties>
+          </component>
+          <component id="5cb3d" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Entrada"/>
+            </properties>
+          </component>
+          <component id="902e5" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Ação"/>
+            </properties>
+          </component>
+          <component id="389a5" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Desvio"/>
+            </properties>
+          </component>
+          <component id="e858a" class="javax.swing.JComboBox" binding="desvio">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <model>
+                <item value=""/>
+                <item value="0"/>
+                <item value="1"/>
+                <item value="2"/>
+                <item value="3"/>
+                <item value="4"/>
+                <item value="5"/>
+                <item value="6"/>
+                <item value="7"/>
+                <item value="8"/>
+                <item value="9"/>
+                <item value="10"/>
+                <item value="11"/>
+                <item value="12"/>
+                <item value="13"/>
+                <item value="14"/>
+                <item value="15"/>
+                <item value="16"/>
+                <item value="17"/>
+                <item value="18"/>
+                <item value="19"/>
+                <item value="20"/>
+                <item value="21"/>
+                <item value="22"/>
+                <item value="23"/>
+                <item value="24"/>
+                <item value="25"/>
+                <item value="26"/>
+                <item value="27"/>
+                <item value="28"/>
+                <item value="29"/>
+                <item value="30"/>
+                <item value="31"/>
+                <item value="32"/>
+                <item value="33"/>
+                <item value="34"/>
+                <item value="35"/>
+                <item value="36"/>
+                <item value="37"/>
+                <item value="38"/>
+                <item value="39"/>
+                <item value="40"/>
+                <item value="41"/>
+                <item value="42"/>
+                <item value="43"/>
+                <item value="44"/>
+                <item value="45"/>
+                <item value="46"/>
+                <item value="47"/>
+                <item value="48"/>
+                <item value="49"/>
+                <item value="50"/>
+                <item value="51"/>
+                <item value="52"/>
+                <item value="53"/>
+                <item value="54"/>
+                <item value="55"/>
+                <item value="56"/>
+                <item value="57"/>
+                <item value="58"/>
+              </model>
+            </properties>
+          </component>
+          <component id="be8d3" class="javax.swing.JComboBox" binding="estadoAtual">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <model>
+                <item value="0"/>
+                <item value="1"/>
+                <item value="2"/>
+                <item value="3"/>
+                <item value="4"/>
+                <item value="5"/>
+                <item value="6"/>
+                <item value="7"/>
+                <item value="8"/>
+                <item value="9"/>
+                <item value="10"/>
+                <item value="11"/>
+                <item value="12"/>
+                <item value="13"/>
+                <item value="14"/>
+                <item value="15"/>
+                <item value="16"/>
+                <item value="17"/>
+                <item value="18"/>
+                <item value="19"/>
+                <item value="20"/>
+                <item value="21"/>
+                <item value="22"/>
+                <item value="23"/>
+                <item value="24"/>
+                <item value="25"/>
+                <item value="26"/>
+                <item value="27"/>
+                <item value="28"/>
+                <item value="29"/>
+                <item value="30"/>
+                <item value="31"/>
+                <item value="32"/>
+                <item value="33"/>
+                <item value="34"/>
+                <item value="35"/>
+                <item value="36"/>
+                <item value="37"/>
+                <item value="38"/>
+                <item value="39"/>
+                <item value="40"/>
+                <item value="41"/>
+                <item value="42"/>
+                <item value="43"/>
+                <item value="44"/>
+                <item value="45"/>
+                <item value="46"/>
+                <item value="47"/>
+                <item value="48"/>
+                <item value="49"/>
+                <item value="50"/>
+                <item value="51"/>
+                <item value="52"/>
+                <item value="53"/>
+                <item value="54"/>
+                <item value="55"/>
+                <item value="56"/>
+                <item value="57"/>
+                <item value="58"/>
+              </model>
+            </properties>
+          </component>
+          <component id="5cae4" class="javax.swing.JComboBox" binding="acao">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <model>
+                <item value="shift"/>
+                <item value="reduce"/>
+                <item value="acc"/>
+              </model>
+            </properties>
+          </component>
+          <component id="4fd4a" class="javax.swing.JButton" binding="inserirButton" default-binding="true">
+            <constraints>
+              <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Inserir"/>
+            </properties>
+          </component>
+          <component id="798db" class="javax.swing.JComboBox" binding="entrada">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <model>
+                <item value="inicio"/>
+                <item value="varinicio"/>
+                <item value="varfim"/>
+                <item value=";"/>
+                <item value="id"/>
+                <item value="int"/>
+                <item value="real"/>
+                <item value="lit"/>
+                <item value="leia"/>
+                <item value="escreva"/>
+                <item value="literal"/>
+                <item value="num"/>
+                <item value="rcb"/>
+                <item value="opm"/>
+                <item value="se"/>
+                <item value="("/>
+                <item value=")"/>
+                <item value="entao"/>
+                <item value="opr"/>
+                <item value="fimse"/>
+                <item value="fim"/>
+                <item value="#"/>
+                <item value="P"/>
+                <item value="V"/>
+                <item value="LV"/>
+                <item value="D"/>
+                <item value="TIPO"/>
+                <item value="A"/>
+                <item value="ES"/>
+                <item value="ARG"/>
+                <item value="CMD"/>
+                <item value="LD"/>
+                <item value="OPRD"/>
+                <item value="COND"/>
+                <item value="CABECALHO"/>
+                <item value="EXP_R"/>
+                <item value="CORPO"/>
+              </model>
+            </properties>
+          </component>
+          <component id="1c9df" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Produção"/>
+            </properties>
+          </component>
+          <component id="14fa8" class="javax.swing.JComboBox" binding="producao">
+            <constraints>
+              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <model>
+                <item value=""/>
+                <item value="1: P' -&gt; P"/>
+                <item value="2: P -&gt;  inicio V A"/>
+                <item value="3: V -&gt; varinicio LV"/>
+                <item value="4: LV -&gt; D LV"/>
+                <item value="5: LV -&gt; varfim ;"/>
+                <item value="6: D -&gt; id TIPO ;"/>
+                <item value="7: TIPO -&gt; int"/>
+                <item value="8: TIPO -&gt; real"/>
+                <item value="9: TIPO -&gt; lit"/>
+                <item value="10: A -&gt; ES A"/>
+                <item value="11: ES -&gt; leia id ;"/>
+                <item value="12: ES -&gt; escreva ARG ;"/>
+                <item value="13: ARG -&gt; literal"/>
+                <item value="14: ARG -&gt; num"/>
+                <item value="15: ARG -&gt; id"/>
+                <item value="16: A -&gt; CMD A"/>
+                <item value="17: CMD -&gt; id rcb LD ;"/>
+                <item value="18: LD -&gt; OPRD opm OPRD"/>
+                <item value="19: LD -&gt; OPRD"/>
+                <item value="20: OPRD -&gt; id"/>
+                <item value="21: OPRD -&gt; num"/>
+                <item value="22: A -&gt; COND A"/>
+                <item value="23: COND -&gt; CABECALHO CORPO"/>
+                <item value="24: CABECALHO -&gt; se ( EXP_R ) entao"/>
+                <item value="25: EXP_R -&gt; OPRD opr OPRD"/>
+                <item value="26: CORPO -&gt; ES CORPO"/>
+                <item value="27: CORPO -&gt; CMD CORPO"/>
+                <item value="28: CORPO -&gt; COND CORPO"/>
+                <item value="29: CORPO -&gt; fimse"/>
+                <item value="30: A -&gt; fim"/>
+              </model>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

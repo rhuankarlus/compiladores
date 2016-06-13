@@ -1,4 +1,4 @@
-package br.com.ufg.compiladores.inicializadores;
+package br.com.ufg.compiladores.tokens;
 
 /**
  * Created by rhuan on 08/05/2016.

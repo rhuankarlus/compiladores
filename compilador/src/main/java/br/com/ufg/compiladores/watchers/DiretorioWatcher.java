@@ -2,12 +2,10 @@ package br.com.ufg.compiladores.watchers;
 
 import java.io.File;
 
-import br.com.ufg.compiladores.analisadores.lexico.LexicoException;
-import br.com.ufg.compiladores.inicializadores.Tokens;
+import br.com.ufg.compiladores.analisadores.sintatico.AnalisadorSintatico;
 import org.apache.log4j.Logger;
 
 import br.com.ufg.compiladores.config.Configuracao;
-import br.com.ufg.compiladores.analisadores.lexico.AnalisadorLexico;
 import br.com.ufg.compiladores.util.ArquivoUtil;
 
 public class DiretorioWatcher implements Runnable {
@@ -18,7 +16,6 @@ public class DiretorioWatcher implements Runnable {
 
     private File diretorio;
     private File diretorioProcessados;
-    private AnalisadorLexico analisadorLexico;
 
     public DiretorioWatcher() {
         diretorio = Configuracao.getInstancia().getDiretorioDeEntrada();
@@ -48,16 +45,8 @@ public class DiretorioWatcher implements Runnable {
                     LOG.info("Encontrei um arquivo a ser compilado!");
 
                     // preparando o analisador lexico
-                    analisadorLexico = AnalisadorLexico.getInstance();
-                    analisadorLexico.setCodigoFonte(arquivo);
-                    Tokens token = null;
-                    do {
-                        try {
-                            token = analisadorLexico.getProximoToken();
-                        } catch (LexicoException e) {
-                            e.printStackTrace();
-                        }
-                    } while (token != Tokens.EOF);
+                    AnalisadorSintatico analisadorSintatico = AnalisadorSintatico.getInstance();
+                    if (!analisadorSintatico.analisarArquivo(arquivo)) throw new RuntimeException("Ocorreu um erro durante a an\u00e1lise sint\u00e1tica.");
                 }
 
                 // movendo arquivo para a pasta de 'processados'

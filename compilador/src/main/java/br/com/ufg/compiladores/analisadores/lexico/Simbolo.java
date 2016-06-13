@@ -1,6 +1,6 @@
 package br.com.ufg.compiladores.analisadores.lexico;
 
-import br.com.ufg.compiladores.inicializadores.Tokens;
+import br.com.ufg.compiladores.tokens.Tokens;
 
 /**
  * Created by rhuan on 01/05/2016.
